@@ -19,10 +19,8 @@ const cluster: Cluster = "mainnet-beta";
 export const raydiumProgramId =
     cluster.toString() == "mainnet-beta" ? MAINNET_PROGRAM_ID : DEVNET_PROGRAM_ID;
 
-export const ammProgram =
-    cluster.toString() == "mainnet-beta"
-        ? new PublicKey("675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8") // mainnet-beta
-        : new PublicKey("HWy1jotHpo6UqeQxx49dpYYdQB8wj9Qk9MdxwjLvDHB8"); // devnet
+export const ammProgram = new PublicKey("pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA") // pumpswap program devnet && mainnet-beta
+      
 
 export const marketProgram =
     cluster.toString() == "mainnet-beta"
