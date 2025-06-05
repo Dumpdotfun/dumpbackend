@@ -21,12 +21,6 @@ export const raydiumProgramId =
 
 export const ammProgram = new PublicKey("pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA") // pumpswap program devnet && mainnet-beta
       
-
-export const marketProgram =
-    cluster.toString() == "mainnet-beta"
-        ? new PublicKey("srmqPvymJeFKQ4zGQed1GFppgkRHL9kaELCbyksJtPX") // mainnet-beta
-        : new PublicKey("EoTcMgcDRTJVZDMZWBoU6rhYHZfkNTVEAfz3uUJRcYGj"); // devnet
-
 export const feeDestination =
     cluster.toString() == "mainnet-beta"
         ? new PublicKey("7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5") // Mainnet
