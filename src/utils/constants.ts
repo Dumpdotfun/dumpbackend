@@ -1,4 +1,3 @@
-
 import { MAINNET_PROGRAM_ID, DEVNET_PROGRAM_ID, TxVersion } from "@raydium-io/raydium-sdk";
 import { Cluster, PublicKey } from "@solana/web3.js";
 
@@ -32,3 +31,7 @@ export const LAMPORT_RESERVES = 1_000_000_000;
 export const GLOBAL_VAULT = "global";
 
 export const makeTxVersion = TxVersion.LEGACY; // LEGACY
+
+export const AGORA_APP_ID = process.env.AGORA_APP_ID || '';
+export const AGORA_APP_CERTIFICATE = process.env.AGORA_APP_CERTIFICATE || '';
+

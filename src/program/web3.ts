@@ -1,4 +1,4 @@
-import { ComputeBudgetProgram, Connection, PublicKey, SYSVAR_RENT_PUBKEY, SystemProgram, Transaction, clusterApiUrl, sendAndConfirmTransaction, } from '@solana/web3.js';
+import { ComputeBudgetProgram, Connection, PublicKey, Transaction, clusterApiUrl, sendAndConfirmTransaction, } from '@solana/web3.js';
 import base58 from 'bs58';
 import { AnchorProvider, Program, web3 } from '@coral-xyz/anchor';
 import { Pumpfun } from './pumpfun'
@@ -117,7 +117,7 @@ const handleSwapEvent = async (event: any, signature: string) => {
       { new: true, runValidators: true })
     // coinKing();
     const newTrade = {
-      creator: event.user.toString(),
+      creator: user.name,
       avatar: user.avatar,
       token: event.mint.toString(),
       name: coin.name,
