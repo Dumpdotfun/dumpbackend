@@ -18,6 +18,7 @@ import commentRoutes from './routes/comment.routes';
 import solPriceRoutes from "./routes/solPriceRoutes";
 import axios from "axios";
 import SolPriceModel from "./models/SolPrice";
+import agoraRoutes from './routes/agoraRoutes';
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use('/reply/', replyRoutes);
 app.use('/chart/', chartRoutes);
 app.use('/api/comments/', commentRoutes);
 app.use('/solPrice', solPriceRoutes)
+app.use('/agora', agoraRoutes);
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/dumpdotfun')

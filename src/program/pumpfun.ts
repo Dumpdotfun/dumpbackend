@@ -5,7 +5,7 @@
  * IDL can be found at `target/idl/pumpfun.json`.
  */
 export type Pumpfun = {
-  "address": "4buA2LqbFpKFkWnMEAF2JD3fdfMPdt5AB5TKFs28buEA",
+  "address": "BGPsmYozwhbbamFixASxZkJjxgb4P3nZRfAYy2Ef5P3c",
   "metadata": {
     "name": "pumpfun",
     "version": "0.1.0",
@@ -544,16 +544,16 @@ export type Pumpfun = {
       ]
     },
     {
-      "name": "migrate",
+      "name": "migratePumpswap",
       "discriminator": [
-        155,
-        234,
-        231,
-        146,
-        236,
-        158,
-        162,
-        30
+        213,
+        208,
+        82,
+        150,
+        115,
+        228,
+        125,
+        132
       ],
       "accounts": [
         {
@@ -631,395 +631,11 @@ export type Pumpfun = {
           }
         },
         {
-          "name": "ammProgram"
-        },
-        {
-          "name": "tokenProgram"
-        },
-        {
-          "name": "associatedTokenProgram"
-        },
-        {
-          "name": "systemProgram"
-        },
-        {
-          "name": "sysvarRent"
-        },
-        {
-          "name": "amm",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "account",
-                "path": "ammProgram"
-              },
-              {
-                "kind": "account",
-                "path": "market"
-              },
-              {
-                "kind": "const",
-                "value": [
-                  97,
-                  109,
-                  109,
-                  95,
-                  97,
-                  115,
-                  115,
-                  111,
-                  99,
-                  105,
-                  97,
-                  116,
-                  101,
-                  100,
-                  95,
-                  115,
-                  101,
-                  101,
-                  100
-                ]
-              }
-            ],
-            "program": {
-              "kind": "account",
-              "path": "ammProgram"
-            }
-          }
-        },
-        {
-          "name": "ammAuthority",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  97,
-                  109,
-                  109,
-                  32,
-                  97,
-                  117,
-                  116,
-                  104,
-                  111,
-                  114,
-                  105,
-                  116,
-                  121
-                ]
-              }
-            ],
-            "program": {
-              "kind": "account",
-              "path": "ammProgram"
-            }
-          }
-        },
-        {
-          "name": "ammOpenOrders",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "account",
-                "path": "ammProgram"
-              },
-              {
-                "kind": "account",
-                "path": "market"
-              },
-              {
-                "kind": "const",
-                "value": [
-                  111,
-                  112,
-                  101,
-                  110,
-                  95,
-                  111,
-                  114,
-                  100,
-                  101,
-                  114,
-                  95,
-                  97,
-                  115,
-                  115,
-                  111,
-                  99,
-                  105,
-                  97,
-                  116,
-                  101,
-                  100,
-                  95,
-                  115,
-                  101,
-                  101,
-                  100
-                ]
-              }
-            ],
-            "program": {
-              "kind": "account",
-              "path": "ammProgram"
-            }
-          }
-        },
-        {
-          "name": "lpMint",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "account",
-                "path": "ammProgram"
-              },
-              {
-                "kind": "account",
-                "path": "market"
-              },
-              {
-                "kind": "const",
-                "value": [
-                  108,
-                  112,
-                  95,
-                  109,
-                  105,
-                  110,
-                  116,
-                  95,
-                  97,
-                  115,
-                  115,
-                  111,
-                  99,
-                  105,
-                  97,
-                  116,
-                  101,
-                  100,
-                  95,
-                  115,
-                  101,
-                  101,
-                  100
-                ]
-              }
-            ],
-            "program": {
-              "kind": "account",
-              "path": "ammProgram"
-            }
-          }
-        },
-        {
           "name": "coinMint",
           "writable": true
         },
         {
-          "name": "pcMint"
-        },
-        {
-          "name": "coinVault",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "account",
-                "path": "ammProgram"
-              },
-              {
-                "kind": "account",
-                "path": "market"
-              },
-              {
-                "kind": "const",
-                "value": [
-                  99,
-                  111,
-                  105,
-                  110,
-                  95,
-                  118,
-                  97,
-                  117,
-                  108,
-                  116,
-                  95,
-                  97,
-                  115,
-                  115,
-                  111,
-                  99,
-                  105,
-                  97,
-                  116,
-                  101,
-                  100,
-                  95,
-                  115,
-                  101,
-                  101,
-                  100
-                ]
-              }
-            ],
-            "program": {
-              "kind": "account",
-              "path": "ammProgram"
-            }
-          }
-        },
-        {
-          "name": "pcVault",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "account",
-                "path": "ammProgram"
-              },
-              {
-                "kind": "account",
-                "path": "market"
-              },
-              {
-                "kind": "const",
-                "value": [
-                  112,
-                  99,
-                  95,
-                  118,
-                  97,
-                  117,
-                  108,
-                  116,
-                  95,
-                  97,
-                  115,
-                  115,
-                  111,
-                  99,
-                  105,
-                  97,
-                  116,
-                  101,
-                  100,
-                  95,
-                  115,
-                  101,
-                  101,
-                  100
-                ]
-              }
-            ],
-            "program": {
-              "kind": "account",
-              "path": "ammProgram"
-            }
-          }
-        },
-        {
-          "name": "targetOrders",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "account",
-                "path": "ammProgram"
-              },
-              {
-                "kind": "account",
-                "path": "market"
-              },
-              {
-                "kind": "const",
-                "value": [
-                  116,
-                  97,
-                  114,
-                  103,
-                  101,
-                  116,
-                  95,
-                  97,
-                  115,
-                  115,
-                  111,
-                  99,
-                  105,
-                  97,
-                  116,
-                  101,
-                  100,
-                  95,
-                  115,
-                  101,
-                  101,
-                  100
-                ]
-              }
-            ],
-            "program": {
-              "kind": "account",
-              "path": "ammProgram"
-            }
-          }
-        },
-        {
-          "name": "ammConfig",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  97,
-                  109,
-                  109,
-                  95,
-                  99,
-                  111,
-                  110,
-                  102,
-                  105,
-                  103,
-                  95,
-                  97,
-                  99,
-                  99,
-                  111,
-                  117,
-                  110,
-                  116,
-                  95,
-                  115,
-                  101,
-                  101,
-                  100
-                ]
-              }
-            ],
-            "program": {
-              "kind": "account",
-              "path": "ammProgram"
-            }
-          }
-        },
-        {
-          "name": "marketProgram"
-        },
-        {
-          "name": "market",
-          "writable": true
-        },
-        {
-          "name": "feeDestination",
+          "name": "wsolMint",
           "writable": true
         },
         {
@@ -1255,7 +871,7 @@ export type Pumpfun = {
               },
               {
                 "kind": "account",
-                "path": "pcMint"
+                "path": "wsolMint"
               }
             ],
             "program": {
@@ -1313,34 +929,34 @@ export type Pumpfun = {
                   221,
                   246,
                   225,
-                  215,
-                  101,
+                  238,
+                  117,
+                  143,
+                  222,
+                  24,
+                  66,
+                  93,
+                  188,
+                  228,
+                  108,
+                  205,
+                  218,
+                  182,
+                  26,
+                  252,
+                  77,
+                  131,
+                  185,
+                  13,
+                  39,
+                  254,
+                  189,
+                  249,
+                  40,
+                  216,
                   161,
-                  147,
-                  217,
-                  203,
-                  225,
-                  70,
-                  206,
-                  235,
-                  121,
-                  172,
-                  28,
-                  180,
-                  133,
-                  237,
-                  95,
-                  91,
-                  55,
-                  145,
-                  58,
-                  140,
-                  245,
-                  133,
-                  126,
-                  255,
-                  0,
-                  169
+                  139,
+                  252
                 ]
               },
               {
@@ -1386,12 +1002,437 @@ export type Pumpfun = {
               ]
             }
           }
+        },
+        {
+          "name": "gobalConfig",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  108,
+                  111,
+                  98,
+                  97,
+                  108,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "pumpswapProgram"
+            }
+          }
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "index"
+              },
+              {
+                "kind": "account",
+                "path": "globalVault"
+              },
+              {
+                "kind": "account",
+                "path": "coinMint"
+              },
+              {
+                "kind": "account",
+                "path": "wsolMint"
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "pumpswapProgram"
+            }
+          }
+        },
+        {
+          "name": "lpMint",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108,
+                  95,
+                  108,
+                  112,
+                  95,
+                  109,
+                  105,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "pumpswapProgram"
+            }
+          }
+        },
+        {
+          "name": "eventAuthority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  95,
+                  95,
+                  101,
+                  118,
+                  101,
+                  110,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "account",
+              "path": "pumpswapProgram"
+            }
+          }
+        },
+        {
+          "name": "userPoolTokenAccount",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "globalVault"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  238,
+                  117,
+                  143,
+                  222,
+                  24,
+                  66,
+                  93,
+                  188,
+                  228,
+                  108,
+                  205,
+                  218,
+                  182,
+                  26,
+                  252,
+                  77,
+                  131,
+                  185,
+                  13,
+                  39,
+                  254,
+                  189,
+                  249,
+                  40,
+                  216,
+                  161,
+                  139,
+                  252
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "lpMint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "poolBaseTokenAccount",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "coinMint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "poolQuoteTokenAccount",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "wsolMint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "pumpswapProgram"
+        },
+        {
+          "name": "tokenProgram",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "token2022Program",
+          "address": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+        },
+        {
+          "name": "associatedTokenProgram",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "sysvarRent",
+          "address": "SysvarRent111111111111111111111111111111111"
         }
       ],
       "args": [
         {
-          "name": "nonce",
-          "type": "u8"
+          "name": "index",
+          "type": "u16"
         }
       ]
     },
@@ -2575,6 +2616,11 @@ export type Pumpfun = {
       "code": 6013,
       "name": "sellLockError",
       "msg": "Can't sell in lock period."
+    },
+    {
+      "code": 6014,
+      "name": "incorrectMint",
+      "msg": "Incorrect mint"
     }
   ],
   "types": [

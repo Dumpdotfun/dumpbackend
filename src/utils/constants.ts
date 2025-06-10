@@ -1,4 +1,3 @@
-
 import { MAINNET_PROGRAM_ID, DEVNET_PROGRAM_ID, TxVersion } from "@raydium-io/raydium-sdk";
 import { Cluster, PublicKey } from "@solana/web3.js";
 
@@ -19,16 +18,8 @@ const cluster: Cluster = "mainnet-beta";
 export const raydiumProgramId =
     cluster.toString() == "mainnet-beta" ? MAINNET_PROGRAM_ID : DEVNET_PROGRAM_ID;
 
-export const ammProgram =
-    cluster.toString() == "mainnet-beta"
-        ? new PublicKey("675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8") // mainnet-beta
-        : new PublicKey("HWy1jotHpo6UqeQxx49dpYYdQB8wj9Qk9MdxwjLvDHB8"); // devnet
-
-export const marketProgram =
-    cluster.toString() == "mainnet-beta"
-        ? new PublicKey("srmqPvymJeFKQ4zGQed1GFppgkRHL9kaELCbyksJtPX") // mainnet-beta
-        : new PublicKey("EoTcMgcDRTJVZDMZWBoU6rhYHZfkNTVEAfz3uUJRcYGj"); // devnet
-
+export const ammProgram = new PublicKey("pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA") // pumpswap program devnet && mainnet-beta
+      
 export const feeDestination =
     cluster.toString() == "mainnet-beta"
         ? new PublicKey("7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5") // Mainnet
@@ -40,3 +31,7 @@ export const LAMPORT_RESERVES = 1_000_000_000;
 export const GLOBAL_VAULT = "global";
 
 export const makeTxVersion = TxVersion.LEGACY; // LEGACY
+
+export const AGORA_APP_ID = process.env.AGORA_APP_ID || '';
+export const AGORA_APP_CERTIFICATE = process.env.AGORA_APP_CERTIFICATE || '';
+

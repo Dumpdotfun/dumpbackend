@@ -1,4 +1,4 @@
-import { ComputeBudgetProgram, Connection, PublicKey, SYSVAR_RENT_PUBKEY, SystemProgram, Transaction, clusterApiUrl, sendAndConfirmTransaction, } from '@solana/web3.js';
+import { ComputeBudgetProgram, Connection, PublicKey, Transaction, clusterApiUrl, sendAndConfirmTransaction, } from '@solana/web3.js';
 import base58 from 'bs58';
 import { AnchorProvider, Program, web3 } from '@coral-xyz/anchor';
 import { Pumpfun } from './pumpfun'
@@ -8,14 +8,13 @@ import * as anchor from '@coral-xyz/anchor';
 import { clients, io } from '../sockets';
 import { Metaplex } from '@metaplex-foundation/js';
 import CoinStatus from '../models/TradeStatus';
-import { ammProgram, marketProgram, feeDestination } from '../utils/constants';
+import { ammProgram} from '../utils/constants';
 import { NATIVE_MINT, createAssociatedTokenAccountIdempotentInstruction, getAssociatedTokenAddressSync } from '@solana/spl-token';
-import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID } from '@raydium-io/raydium-sdk';
-import { createMarket } from './createMarket';
 import UserModel from '../models/User';
 import CoinModel from '../models/Coin';
 import TradeStatus from '../models/TradeStatus';
 import { updateGlobalLastTrade } from "../controller/tokenTradeController";
+import { BN } from 'bn.js';
 
 require('dotenv').config();
 
@@ -118,7 +117,7 @@ const handleSwapEvent = async (event: any, signature: string) => {
       { new: true, runValidators: true })
     // coinKing();
     const newTrade = {
-      creator: event.user.toString(),
+      creator: user.name,
       avatar: user.avatar,
       token: event.mint.toString(),
       name: coin.name,
@@ -209,10 +208,10 @@ const handleMigrate = async (token: PublicKey) => {
       program.programId
     )[0];
     const configAccount = await program.account.config.fetch(configPda);
-    const nonce = PublicKey.findProgramAddressSync(
-      [Buffer.from("amm authority")],
-      ammProgram
-    )[1];
+
+    const index = 1;
+    const indexBN = new BN(index)
+
     const bondingCurve = PublicKey.findProgramAddressSync(
       [Buffer.from("bonding_curve"), token.toBytes()],
       program.programId
@@ -221,25 +220,50 @@ const handleMigrate = async (token: PublicKey) => {
       [Buffer.from("global")],
       program.programId
     )[0];
-    const teamWalletAta = getAssociatedTokenAddressSync(token, configAccount.teamWallet)
 
-    const adminAta = getAssociatedTokenAddressSync(token, adminWallet.publicKey)
+    const pool = PublicKey.findProgramAddressSync(
+      [
+        Buffer.from("pool"),
+        indexBN.toArrayLike(Buffer, "le", 2),
+        globalVault.toBytes(),
+        token.toBytes(),
+        NATIVE_MINT.toBytes()
+      ],
+      ammProgram
+    )[0];
 
-    const market = await createMarket(adminWallet, token, connection);
+    const teamAta = getAssociatedTokenAddressSync(token, adminWallet.publicKey);
+
+    const poolBaseTokenAccountPDA = getAssociatedTokenAddressSync(
+      token,
+      pool,
+      true
+    );
+    const poolQuoteTokenAccountPDA = getAssociatedTokenAddressSync(
+      NATIVE_MINT,
+      pool,
+      true
+    );
 
     const transaction = new Transaction().add(
       createAssociatedTokenAccountIdempotentInstruction(
-        adminWallet.publicKey, // payer
-        teamWalletAta, // ata
-        adminWallet.publicKey, // owner
-        token, // mint
+        adminWallet.publicKey,
+        teamAta,
+        adminWallet.publicKey,
+        token
       ),
       createAssociatedTokenAccountIdempotentInstruction(
-        adminWallet.publicKey, // payer
-        adminAta, // ata
-        adminWallet.publicKey, // owner
-        token, // mint
-      )
+        adminWallet.publicKey,
+        poolBaseTokenAccountPDA,
+        pool,
+        token
+      ),
+      createAssociatedTokenAccountIdempotentInstruction(
+        adminWallet.publicKey,
+        poolQuoteTokenAccountPDA,
+        pool,
+        NATIVE_MINT,
+      ),
     );
     const updateCpIx = ComputeBudgetProgram.setComputeUnitPrice({ microLamports: 1_000_000 });
     const updateCuIx = ComputeBudgetProgram.setComputeUnitLimit({ units: 1000_000 });
@@ -249,30 +273,28 @@ const handleMigrate = async (token: PublicKey) => {
         payer: adminWallet.publicKey,
         teamWallet: configAccount.teamWallet
       }).transaction();
-    const migrateIx = await program.methods.migrate(nonce)
+    const migrateIx = await program.methods
+      .migratePumpswap(index)
       .accounts({
-        teamWallet: configAccount.teamWallet,
-        ammProgram,
         coinMint: token,
-        pcMint: NATIVE_MINT,
-        market,
-        marketProgram,
         payer: adminWallet.publicKey,
-        feeDestination,
-        tokenProgram: TOKEN_PROGRAM_ID,
-        associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
-        systemProgram: SystemProgram.programId,
-        sysvarRent: SYSVAR_RENT_PUBKEY,
+        pumpswapProgram: new PublicKey("pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"),
+        teamWallet: adminWallet.publicKey,
+        wsolMint: NATIVE_MINT
       })
-      .transaction()
+      .instruction();
     transaction.add(updateCpIx, updateCuIx, transferFeeTx, migrateIx);
     transaction.feePayer = adminWallet.publicKey;
     transaction.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
-    const sig = await sendAndConfirmTransaction(connection, transaction, [adminKeypair], { skipPreflight: true })
+    const sig = await sendAndConfirmTransaction(
+      connection, 
+      transaction, 
+      [adminKeypair], 
+      { skipPreflight: true }
+    )
   } catch (error) {
     console.log("Error in migrate:", error);
   }
-
 }
 
 function sleep(ms: number): Promise<void> {
