@@ -75,9 +75,9 @@ const fetchSolPrice = async () => {
     const solPriceData = response.data.data;
     const price = solPriceData['So11111111111111111111111111111111111111112'].price;
     await SolPriceModel.findOneAndUpdate(
-      {},  
+      {},
       { solPrice: price },
-      { upsert: true }  
+      { upsert: true }
     );
   } catch (error) {
     console.log('Error fetching SOL price:', error);
