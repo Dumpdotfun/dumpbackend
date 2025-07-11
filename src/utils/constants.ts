@@ -35,3 +35,8 @@ export const makeTxVersion = TxVersion.LEGACY; // LEGACY
 export const AGORA_APP_ID = process.env.AGORA_APP_ID || '';
 export const AGORA_APP_CERTIFICATE = process.env.AGORA_APP_CERTIFICATE || '';
 
+// LiveKit credentials - store these in env variables for production
+export const LIVEKIT_API_KEY = process.env.LIVEKIT_API_KEY || '';
+export const LIVEKIT_API_SECRET = process.env.LIVEKIT_API_SECRET || '';
+export const LIVEKIT_URL = process.env.LIVEKIT_URL || '';
+

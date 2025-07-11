@@ -133,7 +133,18 @@ const handleSwapEvent = async (event: any, signature: string) => {
     // Save to global last trade
     await updateGlobalLastTrade(newTrade);
 
-    if (io != null) io.emit("TradeUpdated", newTrade)
+    // Send both trade data and updated token data
+    const tradeUpdateData = {
+      trade: newTrade,
+      tokenUpdate: {
+        token: event.mint.toString(),
+        tokenReserves,
+        lamportReserves,
+        progressMcap: parseFloat(progressMcap)
+      }
+    };
+
+    if (io != null) io.emit("TradeUpdated", tradeUpdateData)
     if (clients.has(event.mint.toString())) {
       const clientList = clients.get(event.mint.toString());
       clientList.forEach((client) => {
