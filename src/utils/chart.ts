@@ -85,10 +85,10 @@ const generateExtraCandles = (lastCandle: CandlePrice, numberOfCandles: number, 
   for (let i = 1; i <= numberOfCandles; i++) {
     const newTime = lastCandle.time - (i * candlePeriod);
     extraCandles.unshift({
-      open: 0,
-      high: 0,
-      low: 0,
-      close: 0,
+      open: lastCandle.open,
+      high: lastCandle.open,
+      low: lastCandle.open,
+      close: lastCandle.open,
       time: newTime,
     });
   }
