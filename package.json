@@ -10,7 +10,8 @@
     "postinstall": "tsc",
     "watch-node": "node --watch dist/index.js",
     "watch-ts": "tsc -w",
-    "start": "tsx --watch src/index.ts"
+    "start": "tsx --watch src/index.ts",
+    "start:prod": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
