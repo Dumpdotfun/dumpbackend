@@ -23,11 +23,30 @@ import livekitRoutes from './routes/livekitRoutes';
 
 const app = express();
 
-const whitelist = ["http://localhost:3000"];
+const whitelist = [
+  "http://localhost:3000",
+  "http://localhost:2000",
+  "https://dump-fun-website-tunnel-647vanwr.devinapps.com",
+  "https://dump-fun-app-tunnel-h19ncdwd.devinapps.com",
+  "https://dump-fun-app-tunnel-9i3qn2sc.devinapps.com",
+  "https://dump-front-end-production.up.railway.app"
+];
 
 const corsOptions = {
-  origin: "*",
-  credentials: false,
+  origin: function (origin: any, callback: any) {
+    if (!origin) return callback(null, true);
+    
+    if (origin.includes('localhost')) return callback(null, true);
+    
+    if (origin.includes('devinapps.com')) return callback(null, true);
+    
+    if (whitelist.indexOf(origin) !== -1) {
+      return callback(null, true);
+    }
+    
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
   sameSite: "none",
 };
 
